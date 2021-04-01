@@ -1,2 +1,2 @@
-# Admin Dashboard
-A react based admin dashboard.
+# Admin-Dashboard
+ An admin dashboard created using react and redux 
