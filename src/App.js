@@ -16,11 +16,16 @@ const App = () => {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <AdminRoute path="admin" element={<DashboardLayout  />}>
-            <AdminRoute path="home" element={<AdminPage  />}  />
+          <AdminRoute path="admin" element={<DashboardLayout />}>
+            <AdminRoute path="home" element={<AdminPage />} />
+            <AdminRoute path="dashboard" element={<AdminPage />} />
+            <AdminRoute path="orders" element={<AdminPage  />}  />
+            <AdminRoute path="customers" element={<AdminPage  />}  />
+            <AdminRoute path="products" element={<AdminPage  />}  />
+            <AdminRoute path="staffs" element={<AdminPage  />}  />
           </AdminRoute>
-          <CustomerRoute path="/" element={<MainLayout/>}>
-            <CustomerRoute path="/" element={<HomePage/>}/>
+          <CustomerRoute path="/" element={<MainLayout />}>
+            <CustomerRoute path="/" element={<HomePage />} />
           </CustomerRoute>
         </Routes>
       </BrowserRouter>

@@ -19,8 +19,9 @@ import {
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   UserPlus as UserPlusIcon,
-  Users as UsersIcon
-} from 'react-feather';
+  Users as UsersIcon,
+  List as OrderIcon,
+} from "react-feather";
 import NavItem from './NavItem';
 
 const user = {
@@ -31,45 +32,50 @@ const user = {
 
 const items = [
   {
-    href: '/app/dashboard',
+    href: "/admin/dashboard",
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: "Dashboard",
   },
   {
-    href: '/app/customers',
+    href: "/admin/customers",
     icon: UsersIcon,
-    title: 'Customers'
+    title: "Customers",
   },
   {
-    href: '/app/products',
+    href: "/admin/products",
     icon: ShoppingBagIcon,
-    title: 'Products'
+    title: "Products",
   },
   {
-    href: '/app/account',
+    href: "/admin/orders",
+    icon: OrderIcon,
+    title: "Orders",
+  },
+  {
+    href: "/admin/account",
     icon: UserIcon,
-    title: 'Account'
+    title: "Account",
   },
   {
-    href: '/app/settings',
+    href: "/admin/settings",
     icon: SettingsIcon,
-    title: 'Settings'
+    title: "Settings",
   },
   {
-    href: '/login',
+    href: "/login",
     icon: LockIcon,
-    title: 'Login'
+    title: "Login",
   },
   {
-    href: '/register',
+    href: "/register",
     icon: UserPlusIcon,
-    title: 'Register'
+    title: "Register",
   },
   {
-    href: '/404',
+    href: "/404",
     icon: AlertCircleIcon,
-    title: 'Error'
-  }
+    title: "Error",
+  },
 ];
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
