@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { checkAuthorization, checkAdmin } from "./helpers";
 import ErrorBoundary from "../components/ErrorComponent/admin";
 
-const AdminRoute = ({ component: Component, redirect: pathname, ...rest }) => {
+const AdminRoute = ({ Component: Component, redirect: pathname, ...rest }) => {
   const Routes = (props) => {
     if (true) {
       console.log("dfhvbj");
@@ -38,7 +38,7 @@ const AdminRoute = ({ component: Component, redirect: pathname, ...rest }) => {
 AdminRoute.defaultProps = { redirect: "/admin/login" };
 
 AdminRoute.propTypes = {
-  component: PropTypes.object.isRequired,
+  element: PropTypes.object.isRequired,
   redirect: PropTypes.string,
 };
 

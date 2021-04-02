@@ -1,16 +1,29 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useRoutes } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core";
 import GlobalStyles from "./components/globalStyles";
 import theme from "./components/theme";
-import routes from "./routes";
+import AdminPage from "./containers/admin";
+import AdminRoute from "./utils/adminRouteWrapper";
+import CustomerRoute from './utils/customerRouterWrapper'
+import DashboardLayout from "./components/DashboardLayout";
+import MainLayout from './components/MainLayout'
+import HomePage from './containers/customer'
 
 const App = () => {
-  const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {routing}
+      <BrowserRouter>
+        <Routes>
+          <AdminRoute path="admin" element={<DashboardLayout  />}>
+            <AdminRoute path="home" element={<AdminPage  />}  />
+          </AdminRoute>
+          <CustomerRoute path="/" element={<MainLayout/>}>
+            <CustomerRoute path="/" element={<HomePage/>}/>
+          </CustomerRoute>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

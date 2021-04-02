@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Admin() {
+function Customer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -131,13 +131,9 @@ function Admin() {
   console.log("kdjkfj");
   return (
     <>
-      <h1>lol admin o0ahe</h1>
-      <h1>lol admin o0ahe</h1>
-      <h1>lol admin o0ahe</h1>
-      <h1>lol admin o0ahe</h1> <h1>lol admin o0ahe</h1> <h1>lol admin o0ahe</h1>{" "}
-      <h1>lol admin o0ahe</h1> <h1>lol admin o0ahe</h1> <h1>lol admin o0ahe</h1>
+      <h1>lol customer</h1>
     </>
   );
 }
 
-export default connect(null)(Admin);
+export default connect(null)(Customer);
