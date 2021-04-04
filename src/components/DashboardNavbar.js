@@ -14,25 +14,25 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import InputIcon from "@material-ui/icons/Input";
 import { HomeMaxRounded, HomeOutlined } from "@material-ui/icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
   const [notifications] = useState([]);
-
+  const { logout } = useAuth0();
   return (
     <AppBar elevation={0} {...rest}>
       <Toolbar>
         <RouterLink to="/admin">
-          <Typography
-          color="white"
-          variant="h5"
-          >
+          <Typography color="white" variant="h5">
             Logo or name of the company
           </Typography>
         </RouterLink>
         <Box sx={{ flexGrow: 1 }} />
         <Hidden lgDown>
           <IconButton color="inherit">
-          <RouterLink to="/admin/home" style={{ color: "white"}}><HomeOutlined  /></RouterLink> 
+            <RouterLink to="/admin/home" style={{ color: "white" }}>
+              <HomeOutlined />
+            </RouterLink>
           </IconButton>
           <IconButton color="inherit">
             <Badge
@@ -43,7 +43,10 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            onClick={() => logout({ returnTo: window.location.origin })}
+          >
             <InputIcon />
           </IconButton>
         </Hidden>

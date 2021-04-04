@@ -1,17 +1,16 @@
 // import history from "../utils/history";
 import { Cookies } from "react-cookie";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // export const browserRedirect = (location, route) => {
 //   history.push(location, route ? route : "/");
 // };
 
-export const checkAuthorization = () => {
-  const isLoggedin =
-    localStorage.getItem("token") &&
-    localStorage.getItem("name") &&
-    localStorage.getItem("type");
+export const CheckAuthorization = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log({ isAuthenticated });
 
-  if (isLoggedin) {
+  if (isAuthenticated) {
     return true;
   }
 
@@ -30,7 +29,7 @@ export const checkAuthorizationFromCookie = () => {
   return false;
 };
 
-export const checkTokenExpiry = (err) => {
+export const checkTokenExpiry = (err) => { 
   const isLoggedin =
     localStorage.getItem("token") &&
     localStorage.getItem("name") &&

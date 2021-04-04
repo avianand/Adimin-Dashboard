@@ -1,21 +1,23 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { checkAuthorization, checkAdmin } from "./helpers";
+import { CheckAuthorization, checkAdmin } from "./helpers";
 import ErrorBoundary from "../components/ErrorComponent/admin";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AdminRoute = ({ Component: Component, redirect: pathname, ...rest }) => {
+  const { isAuthenticated } = useAuth0();
+  const check = CheckAuthorization();
+  console.log({ check });
   const Routes = (props) => {
-    if (true) {
-      console.log("dfhvbj");
+    console.log({ isAuthenticated });
+    if (CheckAuthorization()) {
       return (
         <Route
           {...rest}
           render={(props) => {
-            console.log("fsdvb");
             return (
               <ErrorBoundary>
-                {console.log("fsdvb")}
                 <Component {...rest} {...props} />
               </ErrorBoundary>
             );
@@ -23,14 +25,7 @@ const AdminRoute = ({ Component: Component, redirect: pathname, ...rest }) => {
         />
       );
     }
-    return (
-      <Navigate
-        to={{
-          pathname,
-          state: { from: props.location },
-        }}
-      />
-    );
+    return <Navigate to="/login" />;
   };
   return <Routes />;
 };

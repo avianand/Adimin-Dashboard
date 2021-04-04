@@ -23,8 +23,9 @@ import {
   List as OrderIcon,
 } from "react-feather";
 import NavItem from './NavItem';
+import { useAuth0 } from "@auth0/auth0-react";
 
-const user = {
+const userDemo = {
   avatar: '/static/images/avatars/avatar_6.png',
   jobTitle: 'Senior Developer',
   name: 'Katarina Smith'
@@ -78,16 +79,22 @@ const items = [
   },
 ];
 
+
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
-
+  const { user, isAuthenticated, isLoading } = useAuth0();
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
   }, [location.pathname]);
 
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  
   const content = (
+   
     <Box
       sx={{
         display: 'flex',
@@ -102,29 +109,60 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           flexDirection: 'column',
           p: 2
         }}
-      >
-        <Avatar
-          component={RouterLink}
-          src={user.avatar}
-          sx={{
-            cursor: 'pointer',
-            width: 64,
-            height: 64
-          }}
-          to="/app/account"
-        />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
+      > {
+          isAuthenticated ? (
+          <>
+            <Avatar
+              component={RouterLink}
+              src={user.picture}
+              alt={user.name}
+              sx={{
+                cursor: 'pointer',
+                width: 64,
+                height: 64
+              }}
+              to="/admin/profile"
+            />
+            <Typography
+              color="textPrimary"
+              variant="h5"
+            >
+              {user.name}
+            </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body2"
+            >
+              {user.email}
+            </Typography>
+          </>
+          ) : (
+            <>
+              <Avatar
+              component={RouterLink}
+              src={userDemo.avatar}
+              sx={{
+                cursor: 'pointer',
+                width: 64,
+                height: 64
+              }}
+              to="/admin/profile"
+            />
+            <Typography
+              color="textPrimary"
+              variant="h5"
+            >
+              {userDemo.name}
+            </Typography>
+            <Typography
+              color="textSecondary"
+              variant="body2"
+            >
+              {userDemo.jobTitle}
+            </Typography>
+          </>
+          )
+        } 
       </Box>
       <Divider />
       <Box sx={{ p: 2 }}>

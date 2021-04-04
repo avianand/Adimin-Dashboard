@@ -6,8 +6,9 @@ import { Provider } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 import reduxThunk from "redux-thunk";
 import reducers from "./reducers";
-import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 
+const CLIENT_ID = process.env.REACT_APP_AUTH_CLIENT_ID
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -18,9 +19,13 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      
+    <Auth0Provider
+      domain="admindash.us.auth0.com"
+      clientId={CLIENT_ID}
+      redirectUri="http://localhost:3000/admin/profile"
+    >
         <App />
-      
+    </Auth0Provider> 
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
