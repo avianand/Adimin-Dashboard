@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
+import Admin from "./containers/admin";
+import Customer from "./containers/customer";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 
-const AdminPages = () => {
-  return <div>sufvn</div>;
+const CustomerPages = () => {
+  return <div>Customer</div>;
 };
 
-export default AdminPages;
+export default CustomerPages;
