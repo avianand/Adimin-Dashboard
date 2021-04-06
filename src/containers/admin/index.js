@@ -1,8 +1,22 @@
 
 import React from "react";
 import clsx from "clsx"
-import { AppBar, Container, CssBaseline, Grid, Toolbar, Typography, Drawer, Divider, IconButton, Link, makeStyles, List } from "@material-ui/core";
-
+import {
+  AppBar,
+  Container,
+  CssBaseline,
+  Grid,
+  Toolbar,
+  Typography,
+  Drawer,
+  Divider,
+  IconButton,
+  makeStyles,
+  List,
+  Hidden,
+  WithWidth,
+} from "@material-ui/core";
+import PropTypes from "prop-types";
 import {
   Menu as MenuIcon, 
   ChevronLeft as ChevronLeftIcon, 
@@ -13,53 +27,55 @@ import Copyright from '../../components/Copyright'
 
 const drawerWidth = 250;
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.default,
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#0000",
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
   drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
+    position: "relative",
+    whiteSpace: "nowrap",
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9),
     },
   },
   toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
-
-}))
+}));
 
 const AdminPages = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
-  
+  const [open, setOpen] = React.useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -68,12 +84,12 @@ const AdminPages = () => {
   };
 
   return (
-    <div >
-      <CssBaseline/>
+    <div className={classes.root}>
+      <CssBaseline />
       <AppBar className={classes.appBar} position="relative">
         <Toolbar>
           <IconButton onClick={handleDrawerOpen}>
-            <MenuIcon/>
+            <MenuIcon />
           </IconButton>
           dgkj
         </Toolbar>
@@ -100,8 +116,12 @@ const AdminPages = () => {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
-      </div>
-    )
+    </div>
+  );
+};
+
+AdminPages.propTypes = {
+  width: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs"]).isRequired,
 };
 
 export default AdminPages;
