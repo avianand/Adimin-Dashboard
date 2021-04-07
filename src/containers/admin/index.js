@@ -32,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#0000",
+    zIndex: "9999",
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -43,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
+    marginTop: theme.spacing(8),
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -66,14 +66,22 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 8px",
     ...theme.mixins.toolbar,
   },
+  toolbarIconLeft: {
+    color: "#0000",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: "0 8px",
+    ...theme.mixins.toolbar,
+  },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
 }));
 
-const AdminPages = () => {
+const AdminPages = ({width}) => {
   const classes = useStyles();
-
+  
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -87,18 +95,22 @@ const AdminPages = () => {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar className={classes.appBar} position="relative">
-        <Toolbar>
-          <IconButton onClick={handleDrawerOpen}>
-            <MenuIcon />
-          </IconButton>
-          dgkj
-        </Toolbar>
+      <div className={classes.toolbarIconLeft}>
+            <Toolbar color="inherit">
+              <IconButton onClick={handleDrawerOpen}>
+                <MenuIcon />
+              </IconButton>
+              dgkj
+            </Toolbar>
+       </div>
       </AppBar>
       <Container>
         <Grid>
           <Typography variant="h1">Hello!</Typography>
+          current width is : {width}{console.log(width)}
         </Grid>
       </Container>
+      <Hidden smUp>
       <Drawer
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
@@ -116,6 +128,26 @@ const AdminPages = () => {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+      </Hidden>
+      <Hidden xsDown>
+      <Drawer
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={true}
+        onClose={handleDrawerClose}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      </Hidden>
     </div>
   );
 };
