@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { experimentalStyled, makeStyles } from "@material-ui/core";
-import DashboardNavbar from "../../components/AdminNavBar";
+import clsx from 'clsx';
+import {  makeStyles } from "@material-ui/core";
 import DashboardSidebar from "../../components/AdminSideBar";
+
+const drawerWidth = 256;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,9 +18,29 @@ const useStyles = makeStyles((theme) => ({
     flex: "1 1 auto",
     overflow: "hidden",
     paddingTop: 64,
-    [theme.breakpoints.up("lg")]: {
-      paddingLeft: 256,
-    },
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  dashBoardWrapperShift: {
+    display: "flex",
+    flex: "1 1 auto",
+    overflow: "hidden",
+    paddingTop: 64,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   dashBoardContainer: {
     display: "flex",
@@ -35,16 +56,18 @@ const useStyles = makeStyles((theme) => ({
 
 const DashboardLayout = (props) => {
   const classes = useStyles();
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={classes.root}>
-      <DashboardNavbar onMobileNavOpen={() => setMobileNavOpen(true)} />
       <DashboardSidebar
-        onMobileClose={() => setMobileNavOpen(false)}
-        openMobile={isMobileNavOpen}
+        onMobileClose={() => setOpen(false)}
+        open={open}
+        setOpen={setOpen}
       />
-      <div className={classes.dashBoardWrapper}>
+      <div
+          className={clsx(classes.dashBoardWrapper, open && classes.dashBoardWrapperShift)}
+      >
         <div className={classes.dashBoardContainer}>
           <div className={classes.dashBoardContent}>{props.children}</div>
         </div>
