@@ -19,8 +19,6 @@ const user = {
   name: "Katarina Smith",
 };
 
-
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({

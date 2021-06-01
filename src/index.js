@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { applyMiddleware, compose, createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { ThemeProvider } from "@material-ui/core";
+
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import { applyMiddleware, compose, createStore } from "redux";
 import reducers from "./reducers";
-import createSagaMiddleware from "redux-saga";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { ThemeProvider } from "@material-ui/core";
-import useStyles from "./utils/styles";
 import themes from "./utils/themes";
+import Auth0ProviderWithHistory from "./utils/auth0-provider-with-history";
 
 const reduxSagaMonitorOptions = {};
 const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
-const CLIENT_ID = process.env.REACT_APP_AUTH_CLIENT_ID;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -25,11 +24,11 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={themes}>
-        <App />
-      </ThemeProvider>
-    </Provider>
+        <Provider store={store}>
+          <ThemeProvider theme={themes}>
+            <App />
+          </ThemeProvider>
+        </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

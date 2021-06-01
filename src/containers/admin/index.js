@@ -9,6 +9,7 @@ import Copyright from '../../components/Copyright'
 import DashboardLayout from "./dashBoard";
 import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
 import Profile from "./profile";
+import AdminRoutes from "../../utils/customRoutes/adminRoutes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,7 @@ const AdminPages = ({width}) => {
       <DashboardLayout>
         <Typography variant="h1">Hello!</Typography>
         <Switch>
-          <Route path={`${path}/profile`}><Profile/></Route>
+          <Route path={`${path}/profile`} component={Profile} />
         </Switch>
         <Copyright />
       </DashboardLayout>
